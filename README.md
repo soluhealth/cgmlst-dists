@@ -1,6 +1,9 @@
 [![Build Status](https://travis-ci.org/tseemann/cgmlst-dists.svg?branch=master)](https://travis-ci.org/tseemann/cgmlst-dists)
 [![License: GPLv3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Language: C99](https://img.shields.io/badge/Language-ANSI_C-orangered.svg)](https://en.wikipedia.org/wiki/ANSI_C)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/tseemann/cgmlst-dists)](https://github.com/tseemann/cgmlst-dists/releases)
+[![Bioconda downloads](https://img.shields.io/conda/dn/bioconda/cgmlst-dists)](https://bioconda.github.io/recipes/cgmlst-dists/README.html)
+[![Google Scholar citations](https://img.shields.io/badge/citations-Google_Scholar-4285F4?logo=google-scholar)](https://scholar.google.com/scholar?q=%22cgmlst-dists%22+tseemann+github)
 
 # cgmlst-dists
 
