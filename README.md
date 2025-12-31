@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/tseemann/cgmlst-dists.svg?branch=master)](https://travis-ci.org/tseemann/cgmlst-dists)
+[![CI](https://github.com/tseemann/cgmlst-dists/actions/workflows/CI.yml/badge.svg)](https://github.com/tseemann/cgmlst-dists/actions/workflows/CI.yml)
 [![License: GPLv3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Language: C99](https://img.shields.io/badge/Language-ANSI_C-orangered.svg)](https://en.wikipedia.org/wiki/ANSI_C)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/tseemann/cgmlst-dists)](https://github.com/tseemann/cgmlst-dists/releases)
@@ -148,4 +148,4 @@ Report bugs and give suggesions on the
 
 ## Authors
 
-* [Torsten Seemann](https://github.com/tseemann)
+* [Torsten Seemann](https://tsee,amm.github.io)
