@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <sys/types.h>
 
-#define VERSION "0.4.0"
+#define VERSION "0.4.1"
 #define EXENAME "cgmlst-dists"
 #define GITHUB_URL "https://github.com/tseemann/cgmlst-dists"
 //#define DEBUG
@@ -67,9 +67,9 @@ void* calloc_safe(size_t nmemb, size_t size)
 
 int str_replace(char* str, char* old, char* new)
 {
-  size_t sl = strlen(str);
-  size_t ol = strlen(old);
-  size_t nl = strlen(new);
+  size_t sl = strlen(str)+1;
+  size_t ol = strlen(old)+1;
+  size_t nl = strlen(new)+1;
   if (ol < 1 || nl < 1 || ol != nl || sl < ol) {
     fprintf(stderr, "ERROR: str_replace(%lu,%lu,%lu)\n", sl, ol, nl);
     exit(EXIT_FAILURE);
