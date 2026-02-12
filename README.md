@@ -54,30 +54,8 @@ Anything weird is set to zero.
 
 ## Installation
 
-`cgmlst-dists` is written in C and has no other dependencies.
-
-### Homebrew
-```
-brew install brewsci/bio/cgmlst-dists  # COMING IN NOV 2020
-```
-
-### Bioconda
 ```
 conda install -c bioconda cgmlst-dists
-```
-
-### Source
-
-```
-git clone https://github.com/tseemann/cgmlst-dists.git
-cd cgmlst-dists
-make
-
-# run tests
-make check
-
-# optionally install to a specific location (default: /usr/local)
-make PREFIX=/usr/local install
 ```
 
 ## Options
@@ -139,6 +117,8 @@ Report bugs and give suggesions on the
 
 ## Related software
 
+* [Distle](https://github.com/KHajji/distle)
+* [NiST](https://github.com/BioinformaticsPlatformWIV-ISP/MiST)
 * [chewBBACA](https://github.com/B-UMMI/chewBBACA)
 * [snp-dists](https://github.com/tseemann/snp-dists)
 
