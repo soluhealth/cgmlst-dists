@@ -1,11 +1,11 @@
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Ofast
+CFLAGS = -Wall -Wextra -Ofast -fopenmp
 LIBSDIR =
 LIBS = -lm
 
 EXE = cgmlst-dists
-PREFIX = /usr/local
+PREFIX = $(HOME)/.local
 TESTDIR = test
 
 .PHONY: all check clean

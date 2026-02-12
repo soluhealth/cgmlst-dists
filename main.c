@@ -5,8 +5,9 @@
 #include <getopt.h>
 #include <ctype.h>
 #include <sys/types.h>
+#include <omp.h>
 
-#define VERSION "0.4.1"
+#define VERSION "0.5.0"
 #define EXENAME "cgmlst-dists"
 #define GITHUB_URL "https://github.com/tseemann/cgmlst-dists"
 //#define DEBUG
@@ -29,6 +30,7 @@ void show_help(int retcode)
       "  -h\tShow this help\n"
       "  -v\tPrint version and exit\n"
       "  -q\tQuiet mode; do not print progress information\n"
+      "  -j N\tUse this many CPU threads\n"
       "  -c\tUse comma instead of tab in output\n"
       "  -m N\tOutput: 1=lower-tri 2=upper-tri 3=full [3]\n"
       "  -x N\tStop calculating beyond this distance [9999]\n"
@@ -120,7 +122,8 @@ int main(int argc, char* argv[])
 {
   // parse command line parameters
   int opt, quiet = 0, csv = 0, threads = 1, mode = 3, maxdiff = 9999;
-  while ((opt = getopt(argc, argv, "hqcvm:t:x:")) != -1) {
+  int cpus = 1;
+  while ((opt = getopt(argc, argv, "hqcvm:t:x:j:")) != -1) {
     switch (opt) {
       case 'h': show_help(EXIT_SUCCESS); break;
       case 'q': quiet = 1; break;
@@ -128,6 +131,7 @@ int main(int argc, char* argv[])
       case 't': threads = atoi(optarg); break;
       case 'm': mode = atoi(optarg); break;
       case 'x': maxdiff = atoi(optarg); break;
+      case 'j': cpus = atoi(optarg); break;
       case 'v': printf("%s %s\n", EXENAME, VERSION); exit(EXIT_SUCCESS);
       default: show_help(EXIT_FAILURE);
     }
@@ -148,6 +152,9 @@ int main(int argc, char* argv[])
     fprintf(stderr, "This is %s %s\n", EXENAME, VERSION);
     // fprintf(stderr, "Using %d threads (threads>1 currently unsupported).\n", threads);
   }
+
+  // use -j cpu cores
+  omp_set_num_threads(cpus);
 
   // read file one line at a time
   FILE* in = (FILE*) fopen(infile, "r");
