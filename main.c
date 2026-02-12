@@ -80,10 +80,8 @@ int str_replace(char* str, char* old, char* new)
   // char *strstr(const char *haystack, const char *needle);
   char* p = NULL;
   while ( (p = strstr(str, old)) != NULL ) {
-    // char *strncpy(char *dest, const char *src, size_t n);
-    strncpy(p, new, nl);
+    memcpy(p, new, ol-1); // why doesn't just "ol" work?
   }
-  
   return sl;
 }
 
@@ -107,6 +105,9 @@ void cleanup_line(char* str)
   str_replace(s, "PLOT5", "    0");
 
   // replace alpha with space so atoi() works
+  // NOTE: inferred/assigned alleles like
+  // "INF-1" or "INF-431" become -ve integers
+  // -1 and -431 respectively
   while (*s++) {
     if (isalpha(*s)) {
       *s = REPLACE_CHAR;
@@ -121,7 +122,7 @@ void cleanup_line(char* str)
 int main(int argc, char* argv[])
 {
   // parse command line parameters
-  int opt, quiet = 0, csv = 0, threads = 1, mode = 3, maxdiff = 9999;
+  int opt, quiet = 0, csv = 0, threads = 1, mode = 3, maxdiff = 999;
   int cpus = 1;
   while ((opt = getopt(argc, argv, "hqcvm:t:x:j:")) != -1) {
     switch (opt) {
@@ -182,7 +183,9 @@ int main(int argc, char* argv[])
     char* s = strtok_r(buf, DELIMS, &save);
     int col = -1;
     while (s) {
-      //fprintf(stderr, "DEBUG: row=%d col=%d s='%s'\n", row, col, s);
+#ifdef DEBUG
+      fprintf(stderr, "DEBUG: row=%d col=%d/%d s='%s'\n", row, col, ncol, s);
+#endif
       if (row >= 0) {
         if (col < 0) {
           if (strlen(s)==0) {
@@ -204,7 +207,7 @@ int main(int argc, char* argv[])
       s = strtok_r(NULL, DELIMS, &save);
     }
     row++;
-//    if (!quiet) fprintf(stderr, "row %d has %d cols\n", row, col) ;
+    //if (!quiet) fprintf(stderr, "row %d has %d cols\n", row, col) ;
     if (!quiet) fprintf(stderr, "\rLoaded row %d", row);
     if (row==0) ncol = col;
     if (row >= MAX_ASM) {
