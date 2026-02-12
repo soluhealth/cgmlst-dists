@@ -68,12 +68,13 @@ SYNOPSIS
 USAGE
   cgmlst-dists [options] chewbbaca.tab > distances.tsv
 OPTIONS
-  -h    Show this help
-  -v    Print version and exit
-  -q    Quiet mode; do not print progress information
-  -c    Use comma instead of tab in output
-  -m N  Output: 1=lower-tri 2=upper-tri 3=full [3]
-  -x N  Stop calculating beyond this distance [9999]
+  -h	Show this help
+  -v	Print version and exit
+  -q	Quiet mode; do not print progress information
+  -j N	Use this many CPU threads [1]
+  -c	Use comma instead of tab in output
+  -m N	Output: 1=lower-tri 2=upper-tri 3=full [3]
+  -x N	Stop calculating beyond this distance [999]
 URL
   https://github.com/tseemann/cgmlst-dists
 ```
@@ -85,6 +86,11 @@ Prints the name and version separated by a space in standard Unix fashion.
 ```
 cgmlst-dists 0.4.0
 ```
+
+### `cgmlst-dists -j CPUS)
+
+Use multiple threads to compute the distance matrix.
+This gives a linear speed-up in the number of threads.
 
 ### `cgmlst-dists -q` (quiet mode)
 

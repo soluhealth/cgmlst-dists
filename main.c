@@ -7,7 +7,7 @@
 #include <sys/types.h>
 #include <omp.h>
 
-#define VERSION "0.5.0"
+#define VERSION "0.6.0"
 #define EXENAME "cgmlst-dists"
 #define GITHUB_URL "https://github.com/tseemann/cgmlst-dists"
 //#define DEBUG
@@ -30,10 +30,10 @@ void show_help(int retcode)
       "  -h\tShow this help\n"
       "  -v\tPrint version and exit\n"
       "  -q\tQuiet mode; do not print progress information\n"
-      "  -j N\tUse this many CPU threads\n"
+      "  -j N\tUse this many CPU threads [1]\n"
       "  -c\tUse comma instead of tab in output\n"
       "  -m N\tOutput: 1=lower-tri 2=upper-tri 3=full [3]\n"
-      "  -x N\tStop calculating beyond this distance [9999]\n"
+      "  -x N\tStop calculating beyond this distance [999]\n"
 //      "  -t N\tNumber of threads to use [1]\n"
       "URL\n  %s\n"};
   fprintf(out, str, EXENAME, GITHUB_URL);
@@ -229,8 +229,11 @@ int main(int argc, char* argv[])
   // build an output matrix (one dimensional j*nrow+i access)
   int* dist = calloc_safe(nrow*nrow, sizeof(int));
   
+  #pragma omp parallel for schedule(static, 1)
   for (int j=0; j < nrow; j++) {
-    if (!quiet) fprintf(stderr, "\rCalculating distances: %.2f%%", (j+1)*100.0/nrow);
+    if (!quiet && omp_get_thread_num()==0) {
+      fprintf(stderr, "\rCalculating distances: %.2f%%", (j+1)*100.0/nrow);
+    }
     for (int i=0; i < j; i++) {
       int d = distance(call[j], call[i], ncol, maxdiff);
       dist[j*nrow+i] = dist[i*nrow+j] = d;  // matrix is diagonal symetric
