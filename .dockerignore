@@ -1,0 +1,16 @@
+# Build context only needs main.c and Makefile. Everything below is either
+# already-built artifacts, repo metadata, or test fixtures the image doesn't run.
+.git
+.gitignore
+.github/
+test/
+cgmlst-dists
+*.o
+*.dSYM/
+release.sh
+Dockerfile
+.dockerignore
+README.md
+LICENSE
+CODE_OF_CONDUCT.md
+environment.yml

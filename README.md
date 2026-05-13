@@ -1,3 +1,14 @@
+# SOLU INSTRUCTIONS
+## Deployment
+Build image locally
+`docker build . --tag solu/cgmlst-dists:$VERSION`
+## Release
+```
+gcloud auth login
+./release.sh -v <VERSION>
+gcloud auth revoke
+```
+
 [![CI](https://github.com/tseemann/cgmlst-dists/actions/workflows/CI.yml/badge.svg)](https://github.com/tseemann/cgmlst-dists/actions/workflows/CI.yml)
 [![License: GPLv3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Language: C99](https://img.shields.io/badge/Language-ANSI_C-orangered.svg)](https://en.wikipedia.org/wiki/ANSI_C)
